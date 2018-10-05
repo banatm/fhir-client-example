@@ -24,7 +24,7 @@ docker run -d --name fhir-hapi-server -p 8889:8080 my:fhir-hapi-server
 # Using client
 1. Change the server address
 ```
-  SimpleClient fapiClient = new SimpleClient(new Uri("http://192.168.9.109:8889/baseDstu3"))
+  SimpleClient fapiClient = new SimpleClient(new Uri("http://<ip here>:8889/baseDstu3"))
         {
             PreferredFormat = ResourceFormat.Json,
             AllowExternalReferences = false
