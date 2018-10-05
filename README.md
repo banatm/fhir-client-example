@@ -15,11 +15,11 @@ git clone https://github.com/banatm/hapi-fhir-docker.git
 2. Build in docker: 
 ```
 cd hapi-fhir-1/
-docker build . -t gitlab.synevo.intranet:9999/tools/fhir-hapi-server 
+docker build . -t my:fhir-hapi-server 
 ```
 3. Run container: 
 ```
-docker run -d --name fhir-hapi-server -p 8889:8080 gitlab.synevo.intranet:9999/tools/fhir-hapi-server
+docker run -d --name fhir-hapi-server -p 8889:8080 my:fhir-hapi-server
 ```
 # Using client
 1. Change the server address
