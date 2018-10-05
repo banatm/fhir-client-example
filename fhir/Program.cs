@@ -14,7 +14,7 @@ namespace fhir
         SimpleClient fapiClient = new SimpleClient(new Uri("http://192.168.9.109:8889/baseDstu3"))
         {
             PreferredFormat = ResourceFormat.Json,
-            AllowExternalReferences = false
+            UseFullResourcePath = false
         };
 
 
@@ -115,8 +115,8 @@ namespace fhir
 
             specimens.ToList().ForEach(x =>
                 {
-                    x.Request = new List<ResourceReference> { order.GlobalURLReference(client.AllowExternalReferences) };
-                    x.Subject = patient.GlobalURLReference(client.AllowExternalReferences);                    
+                    x.Request = new List<ResourceReference> { order.GlobalURLReference(client.UseFullResourcePath) };
+                    x.Subject = patient.GlobalURLReference(client.UseFullResourcePath);                    
                     client.Create(x);
                 });
         }
@@ -128,7 +128,7 @@ namespace fhir
                 new Observation
                 {
                     Effective =date,
-                    Subject=patient.GlobalURLReference(client.AllowExternalReferences),
+                    Subject=patient.GlobalURLReference(client.UseFullResourcePath),
                     Code=new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/question","LastMeal","Time from last meal"),
                     Status=ObservationStatus.Registered,
                     Category=Constants.PATIENT_QUESTION_OBSERVATION_CATEGORY,
@@ -137,7 +137,7 @@ namespace fhir
                 new Observation
                 {
                     Effective = date,
-                    Subject=patient.GlobalURLReference(client.AllowExternalReferences),
+                    Subject=patient.GlobalURLReference(client.UseFullResourcePath),
                     Code=new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/question","Was nice?","bla bla bla"),
                     Status=ObservationStatus.Registered,
                     Category=Constants.PATIENT_QUESTION_OBSERVATION_CATEGORY,
@@ -157,14 +157,14 @@ namespace fhir
                 Status = RequestStatus.Active,
                 Intent = RequestIntent.Order,
                 Code = Constants.ORDER_PROCEDURE_REQUEST_CODE,
-                Subject = patient.GlobalURLReference(client.AllowExternalReferences),
+                Subject = patient.GlobalURLReference(client.UseFullResourcePath),
                 Requester = new ProcedureRequest.RequesterComponent
                 {
-                    Agent = doctor.GlobalURLReference(client.AllowExternalReferences),
+                    Agent = doctor.GlobalURLReference(client.UseFullResourcePath),
                     OnBehalfOf = Constants.CURRENT_BDP_REFERENCE,
                 },
                 Performer = Constants.CURRENT_LAB_REFERENCE,
-                SupportingInfo = patientQuestions.Select(x=>x.GlobalURLReference(client.AllowExternalReferences)).ToList(),
+                SupportingInfo = patientQuestions.Select(x=>x.GlobalURLReference(client.UseFullResourcePath)).ToList(),
                 Note = new List<Annotation> {
                     new Annotation { Text="Very important comment 1"},
                     new Annotation { Text="Very important comment 2"}
@@ -176,11 +176,11 @@ namespace fhir
             var orderServices = serviceCodes.Select(serviceCode =>
                  new ProcedureRequest
                  {
-                     Requisition = fhirOrder.GlobalURLIdentifier(),
+                     Requisition = fhirOrder.GlobalURLIdentifier(client.UseFullResourcePath),
                      AuthoredOn = date.ToString(),
                      Status = RequestStatus.Active,    
                      Intent=RequestIntent.InstanceOrder,
-                     Subject=patient.GlobalURLReference(client.AllowExternalReferences),
+                     Subject=patient.GlobalURLReference(client.UseFullResourcePath),
                      Code = new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/service", serviceCode)                                                           
                  });
             orderServices.ToList().ForEach(x=>client.Create(x));

@@ -15,10 +15,12 @@ namespace fhir
 
         }
 
-        public static Identifier GlobalURLIdentifier<T>(this T source) where T : Resource
+        public static Identifier GlobalURLIdentifier<T>(this T source, bool useFullPath) where T : Resource
         {
-            return new Identifier(source.ResourceBase.ToString(), source.Id);
-            
+            return
+                useFullPath ?
+                    new Identifier($"{ source.ResourceBase.ToString()}/{typeof(T).GetCollectionName()}", source.Id)
+                    : new Identifier(typeof(T).GetCollectionName(),source.Id);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace fhir
     {
         public class SimpleClient: FhirClient
         {
-            public bool AllowExternalReferences { get; set; }
+            public bool UseFullResourcePath { get; set; }
             public SimpleClient(Uri endpoint, bool verifyFhirVersion = false) : base(endpoint, verifyFhirVersion)
             {
             }
