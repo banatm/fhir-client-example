@@ -31,11 +31,21 @@ namespace fhir
 
             var patient= createPatient();
             var doctor = createPractitioner();
-            var patientQuestions = createPatientQuestionReponses(now,patient);
-            
+                        
 
-            var order = createProcedureRequest(now,patient,doctor,patientQuestions,new[] {"AST","ALT", "Super profile"});
-            createSpecimenAndTubes(order,patient,now);
+            var order = createProcedureRequest(now,patient,doctor,new[] {"AST","ALT", "Super profile"});
+            var tubes= createSpecimenAndTubes(order,patient,now);
+            var patientResponses = createPatientQuestionReponses(now, patient,order);
+
+            //finish order and change its status
+            var orderSupportingInfo = tubes.Select(t => t.GlobalURLReference(client.UseFullResourcePath)).ToList();
+            orderSupportingInfo.Add(patientResponses.GlobalURLReference(client.UseFullResourcePath));
+
+            order.SupportingInfo = orderSupportingInfo;
+            order.Status = RequestStatus.Active;
+            client.Update(order);
+                
+                
 
             //list patients
             Console.WriteLine("\n\nPatients:");
@@ -50,9 +60,12 @@ namespace fhir
                  ).Result.ToList().ForEach(Console.WriteLine);
 
             Console.WriteLine("\n\nPatient Questions:");
-            client.ResourcesToStringAsync<Observation>(
-                      p => $"ID: {p.Id}, Patient: {p?.Subject.Reference}, Question: {p?.Code.Coding?.FirstOrDefault()?.Code}, Answer: {p.Value}"
-                  ).Result.ToList().ForEach(Console.WriteLine);
+            client.ResourcesToStringAsync<QuestionnaireResponse>(
+                      p =>
+                      {
+                          var answers = p?.Item.Select(i => $"{i.Text}:{i.Answer.FirstOrDefault()?.Item}");
+                          return $"ID: {p.Id}, Order: {p?.Subject.Reference}, Patient: {p?.Source}, Answers: {string.Join(',', answers)}";
+                      }).Result.ToList().ForEach(Console.WriteLine);
 
             Console.WriteLine("\n\nOrders:");
             client.ResourcesToStringAsync<ProcedureRequest>(
@@ -69,7 +82,7 @@ namespace fhir
             Console.Read();
         }
 
-        private void createSpecimenAndTubes(ProcedureRequest order, Patient patient, FhirDateTime collectionDate)
+        private IEnumerable<Specimen> createSpecimenAndTubes(ProcedureRequest order, Patient patient, FhirDateTime collectionDate)
         {
             var specimens = new List<Specimen>
             {
@@ -113,48 +126,54 @@ namespace fhir
                 },
             };
 
-            specimens.ToList().ForEach(x =>
-                {
-                    x.Request = new List<ResourceReference> { order.GlobalURLReference(client.UseFullResourcePath) };
-                    x.Subject = patient.GlobalURLReference(client.UseFullResourcePath);                    
-                    client.Create(x);
-                });
+
+            return specimens.Select(x =>
+            {
+                x.Request = new List<ResourceReference> { order.GlobalURLReference(client.UseFullResourcePath) };
+                x.Subject = patient.GlobalURLReference(client.UseFullResourcePath);
+                return client.Create(x);
+            });
         }
 
-        private IEnumerable<Observation> createPatientQuestionReponses(FhirDateTime date, Patient patient)
+        private QuestionnaireResponse createPatientQuestionReponses(FhirDateTime date, Patient patient, ProcedureRequest request)
         {
-            var patientQuestions = new List<Observation>
+            var patientQuestions = new QuestionnaireResponse
             {
-                new Observation
-                {
-                    Effective =date,
-                    Subject=patient.GlobalURLReference(client.UseFullResourcePath),
-                    Code=new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/question","LastMeal","Time from last meal"),
-                    Status=ObservationStatus.Registered,
-                    Category=Constants.PATIENT_QUESTION_OBSERVATION_CATEGORY,
-                    Value = new Quantity(2,"h")
-                },
-                new Observation
-                {
-                    Effective = date,
-                    Subject=patient.GlobalURLReference(client.UseFullResourcePath),
-                    Code=new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/question","Was nice?","bla bla bla"),
-                    Status=ObservationStatus.Registered,
-                    Category=Constants.PATIENT_QUESTION_OBSERVATION_CATEGORY,
-                    Value = new FhirBoolean(true)
+                Authored =date.ToString(),
+                Subject=request.GlobalURLReference(client.UseFullResourcePath),
+                Source=patient.GlobalURLReference(client.UseFullResourcePath),
+                Status=QuestionnaireResponse.QuestionnaireResponseStatus.Completed,
+                Item = new List<QuestionnaireResponse.ItemComponent>()
+                { 
+                    new QuestionnaireResponse.ItemComponent()
+                    {
+                        LinkId = $"https://dia.medicover.com/serviceknowledgebase/question/LastMeal",
+                        Definition = $"https://dia.medicover.com/serviceknowledgebase/question/LastMeal",
+                        Text="Time from last meal",
+                        Answer = new List<QuestionnaireResponse.AnswerComponent>{
+                            new QuestionnaireResponse.AnswerComponent{Value=new Quantity(2,"h")}
+                        }
+                    },
+                    new QuestionnaireResponse.ItemComponent{
+                        LinkId = $"https://dia.medicover.com/serviceknowledgebase/question/Nice",
+                        Definition = $"https://dia.medicover.com/serviceknowledgebase/question/Nice",
+                        Text="Nice enviroment?",                        
+                        Answer = new List<QuestionnaireResponse.AnswerComponent>{
+                            new QuestionnaireResponse.AnswerComponent{Value=new FhirBoolean(true)}
+                        }
+                    }
                 }
             };
-
-            return patientQuestions.Select(x => client.Create(x)).ToList();
+            return client.Create(patientQuestions);             
         }
 
-        private ProcedureRequest createProcedureRequest(FhirDateTime date, Patient patient, Practitioner doctor, IEnumerable<Observation> patientQuestions,  string[] serviceCodes)
+        private ProcedureRequest createProcedureRequest(FhirDateTime date, Patient patient, Practitioner doctor, string[] serviceCodes)
         {
             var order = new ProcedureRequest
             {
                 Identifier = new List<Identifier> { new Identifier { System = "https://dia.medicover.com/sampleID", Value = "999999999900" } },
                 AuthoredOn = date.ToString(),
-                Status = RequestStatus.Active,
+                Status = RequestStatus.Draft,
                 Intent = RequestIntent.Order,
                 Code = Constants.ORDER_PROCEDURE_REQUEST_CODE,
                 Subject = patient.GlobalURLReference(client.UseFullResourcePath),
@@ -163,8 +182,7 @@ namespace fhir
                     Agent = doctor.GlobalURLReference(client.UseFullResourcePath),
                     OnBehalfOf = Constants.CURRENT_BDP_REFERENCE,
                 },
-                Performer = Constants.CURRENT_LAB_REFERENCE,
-                SupportingInfo = patientQuestions.Select(x=>x.GlobalURLReference(client.UseFullResourcePath)).ToList(),
+                Performer = Constants.CURRENT_LAB_REFERENCE,                
                 Note = new List<Annotation> {
                     new Annotation { Text="Very important comment 1"},
                     new Annotation { Text="Very important comment 2"}
