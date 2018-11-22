@@ -17,13 +17,19 @@ namespace fhir
             UseFullResourcePath = false
         };
 
+        SimpleClient localfapiClient = new SimpleClient(new Uri("http://localhost:8080/R4"))
+        {
+            PreferredFormat = ResourceFormat.Json,
+            UseFullResourcePath = false
+        };
+
 
         SimpleClient vonkClient =   new SimpleClient(new Uri("http://192.168.9.109:8888"))
                 {
                     PreferredFormat = ResourceFormat.Json                    
                 };
                 
-        SimpleClient client { get { return fapiClient; } }
+        SimpleClient client { get { return localfapiClient; } }
                 
         public void run()
         {
@@ -33,7 +39,7 @@ namespace fhir
             var doctor = createPractitioner();
                         
 
-            var order = createProcedureRequest(now,patient,doctor,new[] {"AST","ALT", "Super profile"});
+            var order = createOrder(now,patient,doctor,new[] {"AST","ALT", "Super profile"});
             var tubes= createSpecimenAndTubes(order,patient,now);
             var patientResponses = createPatientQuestionReponses(now, patient,order);
 
@@ -43,46 +49,16 @@ namespace fhir
 
             order.SupportingInfo = orderSupportingInfo;
             order.Status = RequestStatus.Active;
+            
             client.Update(order);
                 
                 
-
-            //list patients
-            Console.WriteLine("\n\nPatients:");
-            client.ResourcesToStringAsync<Patient>(
-                    p => $"ID: {p.Id}, Surname {p?.Name.FirstOrDefault()?.Family}, Name: {string.Join(" ", p?.Name.FirstOrDefault()?.Given)}"
-                ).Result.ToList().ForEach(Console.WriteLine);
-
-            //list doctors
-            Console.WriteLine("\n\nDoctors:");
-           client.ResourcesToStringAsync<Practitioner>(
-                     p => $"ID: {p.Id}, Surname {p?.Name.FirstOrDefault()?.Family}, Name: {string.Join(" ", p?.Name.FirstOrDefault()?.Given)}"
-                 ).Result.ToList().ForEach(Console.WriteLine);
-
-            Console.WriteLine("\n\nPatient Questions:");
-            client.ResourcesToStringAsync<QuestionnaireResponse>(
-                      p =>
-                      {
-                          var answers = p?.Item.Select(i => $"{i.Text}:{i.Answer.FirstOrDefault()?.Item}");
-                          return $"ID: {p.Id}, Order: {p?.Subject.Reference}, Patient: {p?.Source}, Answers: {string.Join(',', answers)}";
-                      }).Result.ToList().ForEach(Console.WriteLine);
-
-            Console.WriteLine("\n\nOrders:");
-            client.ResourcesToStringAsync<ProcedureRequest>(
-                      p => $"ID: {p.Id}, Intent:{p.Intent},  Patient: {p?.Subject.Reference}, Test: {p?.Code.Coding?.FirstOrDefault()?.Code}"
-                  ).Result.ToList().ForEach(Console.WriteLine);
-
-            Console.WriteLine("\n\nSpecimens:");
-            client.ResourcesToStringAsync<Specimen>(
-                      p => $"ID: {p.Id},   Patient: {p?.Subject.Reference}"
-                  ).Result.ToList().ForEach(Console.WriteLine);
+            
 
 
-
-            Console.Read();
         }
 
-        private IEnumerable<Specimen> createSpecimenAndTubes(ProcedureRequest order, Patient patient, FhirDateTime collectionDate)
+        private IEnumerable<Specimen> createSpecimenAndTubes(ServiceRequest order, Patient patient, FhirDateTime collectionDate)
         {
             var specimens = new List<Specimen>
             {
@@ -135,12 +111,12 @@ namespace fhir
             });
         }
 
-        private QuestionnaireResponse createPatientQuestionReponses(FhirDateTime date, Patient patient, ProcedureRequest request)
+        private QuestionnaireResponse createPatientQuestionReponses(FhirDateTime date, Patient patient, ServiceRequest order)
         {
             var patientQuestions = new QuestionnaireResponse
             {
                 Authored =date.ToString(),
-                Subject=request.GlobalURLReference(client.UseFullResourcePath),
+                Subject=order.GlobalURLReference(client.UseFullResourcePath),
                 Source=patient.GlobalURLReference(client.UseFullResourcePath),
                 Status=QuestionnaireResponse.QuestionnaireResponseStatus.Completed,
                 Item = new List<QuestionnaireResponse.ItemComponent>()
@@ -167,9 +143,9 @@ namespace fhir
             return client.Create(patientQuestions);             
         }
 
-        private ProcedureRequest createProcedureRequest(FhirDateTime date, Patient patient, Practitioner doctor, string[] serviceCodes)
+        private ServiceRequest createOrder(FhirDateTime date, Patient patient, Practitioner doctor, string[] serviceCodes)
         {
-            var order = new ProcedureRequest
+            var order = new ServiceRequest
             {
                 Identifier = new List<Identifier> { new Identifier { System = "https://dia.medicover.com/sampleID", Value = "999999999900" } },
                 AuthoredOn = date.ToString(),
@@ -177,12 +153,9 @@ namespace fhir
                 Intent = RequestIntent.Order,
                 Code = Constants.ORDER_PROCEDURE_REQUEST_CODE,
                 Subject = patient.GlobalURLReference(client.UseFullResourcePath),
-                Requester = new ProcedureRequest.RequesterComponent
-                {
-                    Agent = doctor.GlobalURLReference(client.UseFullResourcePath),
-                    OnBehalfOf = Constants.CURRENT_BDP_REFERENCE,
-                },
-                Performer = Constants.CURRENT_LAB_REFERENCE,                
+                Requester = doctor.GlobalURLReference(client.UseFullResourcePath),
+                OrderDetail = serviceCodes.Select(sc => new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/service",sc )).ToList(),
+                Performer = new List<ResourceReference> { Constants.CURRENT_LAB_REFERENCE },                
                 Note = new List<Annotation> {
                     new Annotation { Text="Very important comment 1"},
                     new Annotation { Text="Very important comment 2"}
@@ -190,19 +163,6 @@ namespace fhir
             };
 
             var fhirOrder = client.Create(order);
-
-            var orderServices = serviceCodes.Select(serviceCode =>
-                 new ProcedureRequest
-                 {
-                     Requisition = fhirOrder.GlobalURLIdentifier(client.UseFullResourcePath),
-                     AuthoredOn = date.ToString(),
-                     Status = RequestStatus.Active,    
-                     Intent=RequestIntent.InstanceOrder,
-                     Subject=patient.GlobalURLReference(client.UseFullResourcePath),
-                     Code = new CodeableConcept("https://dia.medicover.com/serviceknowledgebase/service", serviceCode)                                                           
-                 });
-            orderServices.ToList().ForEach(x=>client.Create(x));
-
             return fhirOrder;
         }
 
@@ -219,10 +179,10 @@ namespace fhir
                 } },
                 BirthDate = "1980-01-01",
                 Address = new List<Address>(){ new Address {
-                    City ="Dąbrowa Dolna",
+                    City ="Ksawerow",
                     Country ="PL",
                     PostalCode ="95-000",
-                    Line =new[] {"Do lasu 31"}
+                    Line =new[] {"Do lasu 31/24"}
                 } }                                             
             };
 
@@ -238,7 +198,7 @@ namespace fhir
                 Identifier = new List<Identifier> { new Identifier {
                     System = "http://rejestr.nil.org.pl", Value = "1111" } },                
                 Address = new List<Address>() { new Address {
-                    City = "Łódź",
+                    City = "Pabianice",
                     Country = "PL",
                     PostalCode = "90-001",
                     Line = new[] { "Cacackiego 5" }

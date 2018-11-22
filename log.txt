@@ -1,0 +1,536 @@
+##Request
+```sh
+curl -X POST http://localhost:8080/R4/Patient -H "Content-Type: application/json" -d '{"resourceType":"Patient","identifier":[{"system":"https://www.gov.pl/cyfryzacja/rejestr-pesel","value":"12345678901"}],"name":[{"family":"Kowalski","given":["Jan","Janusz"]}],"gender":"male","birthDate":"1980-01-01","address":[{"line":["Do lasu 31/24"],"city":"Ksawerow","postalCode":"95-000","country":"PL"}]}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"1"
+Location: http://localhost:8080/R4/Patient/121/_history/1
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/Patient/121/_history/1
+Last-Modified: Thu, 22 Nov 2018 16:02:08 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "Patient",
+  "id": "121",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:08.891+00:00"
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Jan Janusz <b>KOWALSKI </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>12345678901</td></tr><tr><td>Address</td><td><span>Do lasu 31/24 </span><br/><span>Ksawerow </span><span>PL </span></td></tr><tr><td>Date of birth</td><td><span>01 January 1980</span></td></tr></tbody></table></div>"
+  },
+  "identifier": [
+    {
+      "system": "https://www.gov.pl/cyfryzacja/rejestr-pesel",
+      "value": "12345678901"
+    }
+  ],
+  "name": [
+    {
+      "family": "Kowalski",
+      "given": [
+        "Jan",
+        "Janusz"
+      ]
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1980-01-01",
+  "address": [
+    {
+      "line": [
+        "Do lasu 31/24"
+      ],
+      "city": "Ksawerow",
+      "postalCode": "95-000",
+      "country": "PL"
+    }
+  ]
+}
+```
+##Request
+```sh
+curl -X POST http://localhost:8080/R4/Practitioner -H "Content-Type: application/json" -d '{"resourceType":"Practitioner","identifier":[{"system":"http://rejestr.nil.org.pl","value":"1111"}],"name":[{"family":"Abacki","given":["Henryk"]}],"address":[{"line":["Cacackiego 5"],"city":"Pabianice","postalCode":"90-001","country":"PL"}],"gender":"male"}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"1"
+Location: http://localhost:8080/R4/Practitioner/122/_history/1
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/Practitioner/122/_history/1
+Last-Modified: Thu, 22 Nov 2018 16:02:09 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "Practitioner",
+  "id": "122",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:09.849+00:00"
+  },
+  "identifier": [
+    {
+      "system": "http://rejestr.nil.org.pl",
+      "value": "1111"
+    }
+  ],
+  "name": [
+    {
+      "family": "Abacki",
+      "given": [
+        "Henryk"
+      ]
+    }
+  ],
+  "address": [
+    {
+      "line": [
+        "Cacackiego 5"
+      ],
+      "city": "Pabianice",
+      "postalCode": "90-001",
+      "country": "PL"
+    }
+  ],
+  "gender": "male"
+}
+```
+##Request
+```sh
+curl -X POST http://localhost:8080/R4/ServiceRequest -H "Content-Type: application/json" -d '{"resourceType":"ServiceRequest","identifier":[{"system":"https://dia.medicover.com/sampleID","value":"999999999900"}],"status":"draft","intent":"order","code":{"coding":[{"system":"http://snomed.info/sct","code":"108252007"}],"text":"Laboratory procedure"},"orderDetail":[{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"AST"}]},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"ALT"}]},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"Super profile"}]}],"subject":{"reference":"Patient/121"},"authoredOn":"2018-11-22T17:02:07.171+01:00","requester":{"reference":"Practitioner/122"},"performer":[{"reference":"https://dia.medicover.com/logistics/Organization/LAB-PL-GDANSK"}],"note":[{"text":"Very important comment 1"},{"text":"Very important comment 2"}]}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"1"
+Location: http://localhost:8080/R4/ServiceRequest/123/_history/1
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/ServiceRequest/123/_history/1
+Last-Modified: Thu, 22 Nov 2018 16:02:10 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "ServiceRequest",
+  "id": "123",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:10.063+00:00"
+  },
+  "identifier": [
+    {
+      "system": "https://dia.medicover.com/sampleID",
+      "value": "999999999900"
+    }
+  ],
+  "status": "draft",
+  "intent": "order",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "108252007"
+      }
+    ],
+    "text": "Laboratory procedure"
+  },
+  "orderDetail": [
+    {
+      "coding": [
+        {
+          "system": "https://dia.medicover.com/serviceknowledgebase/service",
+          "code": "AST"
+        }
+      ]
+    },
+    {
+      "coding": [
+        {
+          "system": "https://dia.medicover.com/serviceknowledgebase/service",
+          "code": "ALT"
+        }
+      ]
+    },
+    {
+      "coding": [
+        {
+          "system": "https://dia.medicover.com/serviceknowledgebase/service",
+          "code": "Super profile"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "reference": "Patient/121"
+  },
+  "authoredOn": "2018-11-22T17:02:07.171+01:00",
+  "requester": {
+    "reference": "Practitioner/122"
+  },
+  "performer": [
+    {
+      "reference": "https://dia.medicover.com/logistics/Organization/LAB-PL-GDANSK"
+    }
+  ],
+  "note": [
+    {
+      "text": "Very important comment 1"
+    },
+    {
+      "text": "Very important comment 2"
+    }
+  ]
+}
+```
+##Request
+```sh
+curl -X POST http://localhost:8080/R4/QuestionnaireResponse -H "Content-Type: application/json" -d '{"resourceType":"QuestionnaireResponse","status":"completed","subject":{"reference":"ServiceRequest/123"},"authored":"2018-11-22T17:02:07.171+01:00","source":{"reference":"Patient/121"},"item":[{"linkId":"https://dia.medicover.com/serviceknowledgebase/question/LastMeal","definition":"https://dia.medicover.com/serviceknowledgebase/question/LastMeal","text":"Time from last meal","answer":[{"valueQuantity":{"value":2,"unit":"h","system":"http://unitsofmeasure.org","code":"h"}}]},{"linkId":"https://dia.medicover.com/serviceknowledgebase/question/Nice","definition":"https://dia.medicover.com/serviceknowledgebase/question/Nice","text":"Nice enviroment?","answer":[{"valueBoolean":true}]}]}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"1"
+Location: http://localhost:8080/R4/QuestionnaireResponse/124/_history/1
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/QuestionnaireResponse/124/_history/1
+Last-Modified: Thu, 22 Nov 2018 16:02:10 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "124",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:10.273+00:00"
+  },
+  "status": "completed",
+  "subject": {
+    "reference": "ServiceRequest/123"
+  },
+  "authored": "2018-11-22T17:02:07.171+01:00",
+  "source": {
+    "reference": "Patient/121"
+  },
+  "item": [
+    {
+      "linkId": "https://dia.medicover.com/serviceknowledgebase/question/LastMeal",
+      "definition": "https://dia.medicover.com/serviceknowledgebase/question/LastMeal",
+      "text": "Time from last meal",
+      "answer": [
+        {
+          "valueQuantity": {
+            "value": 2,
+            "unit": "h",
+            "system": "http://unitsofmeasure.org",
+            "code": "h"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "https://dia.medicover.com/serviceknowledgebase/question/Nice",
+      "definition": "https://dia.medicover.com/serviceknowledgebase/question/Nice",
+      "text": "Nice enviroment?",
+      "answer": [
+        {
+          "valueBoolean": true
+        }
+      ]
+    }
+  ]
+}
+```
+##Request
+```sh
+curl -X POST http://localhost:8080/R4/Specimen -H "Content-Type: application/json" -d '{"resourceType":"Specimen","status":"available","type":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/specimen","code":"EDTA"}],"text":"EDTA blood"},"subject":{"reference":"Patient/121"},"request":[{"reference":"ServiceRequest/123"}],"collection":{"collectedDateTime":"2018-11-22T17:02:07.171+01:00","quantity":{"value":1}},"container":[{"identifier":[{"system":"https://dia.medicover.com/sampleID","value":"999999999901"}],"type":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/tube","code":"EDTA"}],"text":"EDTA tube"}}]}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"1"
+Location: http://localhost:8080/R4/Specimen/125/_history/1
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/Specimen/125/_history/1
+Last-Modified: Thu, 22 Nov 2018 16:02:10 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "Specimen",
+  "id": "125",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:10.456+00:00"
+  },
+  "status": "available",
+  "type": {
+    "coding": [
+      {
+        "system": "https://dia.medicover.com/serviceknowledgebase/specimen",
+        "code": "EDTA"
+      }
+    ],
+    "text": "EDTA blood"
+  },
+  "subject": {
+    "reference": "Patient/121"
+  },
+  "request": [
+    {
+      "reference": "ServiceRequest/123"
+    }
+  ],
+  "collection": {
+    "collectedDateTime": "2018-11-22T17:02:07.171+01:00",
+    "quantity": {
+      "value": 1
+    }
+  },
+  "container": [
+    {
+      "identifier": [
+        {
+          "system": "https://dia.medicover.com/sampleID",
+          "value": "999999999901"
+        }
+      ],
+      "type": {
+        "coding": [
+          {
+            "system": "https://dia.medicover.com/serviceknowledgebase/tube",
+            "code": "EDTA"
+          }
+        ],
+        "text": "EDTA tube"
+      }
+    }
+  ]
+}
+```
+##Request
+```sh
+curl -X POST http://localhost:8080/R4/Specimen -H "Content-Type: application/json" -d '{"resourceType":"Specimen","status":"available","type":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/specimen","code":"SER"}],"text":"Serum"},"subject":{"reference":"Patient/121"},"request":[{"reference":"ServiceRequest/123"}],"collection":{"collectedDateTime":"2018-11-22T17:02:07.171+01:00","quantity":{"value":3}},"container":[{"identifier":[{"system":"https://dia.medicover.com/sampleID","value":"999999999902"}],"type":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/tube","code":"SER-B"}],"text":"Serum Bio"}},{"identifier":[{"system":"https://dia.medicover.com/sampleID","value":"999999999903"}],"type":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/tube","code":"SER-I"}],"text":"Serum IM"}},{"identifier":[{"system":"https://dia.medicover.com/sampleID","value":"999999999904"}],"type":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/tube","code":"SER-D"}],"text":"Serum DE"}}]}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"1"
+Location: http://localhost:8080/R4/Specimen/126/_history/1
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/Specimen/126/_history/1
+Last-Modified: Thu, 22 Nov 2018 16:02:10 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "Specimen",
+  "id": "126",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:10.567+00:00"
+  },
+  "status": "available",
+  "type": {
+    "coding": [
+      {
+        "system": "https://dia.medicover.com/serviceknowledgebase/specimen",
+        "code": "SER"
+      }
+    ],
+    "text": "Serum"
+  },
+  "subject": {
+    "reference": "Patient/121"
+  },
+  "request": [
+    {
+      "reference": "ServiceRequest/123"
+    }
+  ],
+  "collection": {
+    "collectedDateTime": "2018-11-22T17:02:07.171+01:00",
+    "quantity": {
+      "value": 3
+    }
+  },
+  "container": [
+    {
+      "identifier": [
+        {
+          "system": "https://dia.medicover.com/sampleID",
+          "value": "999999999902"
+        }
+      ],
+      "type": {
+        "coding": [
+          {
+            "system": "https://dia.medicover.com/serviceknowledgebase/tube",
+            "code": "SER-B"
+          }
+        ],
+        "text": "Serum Bio"
+      }
+    },
+    {
+      "identifier": [
+        {
+          "system": "https://dia.medicover.com/sampleID",
+          "value": "999999999903"
+        }
+      ],
+      "type": {
+        "coding": [
+          {
+            "system": "https://dia.medicover.com/serviceknowledgebase/tube",
+            "code": "SER-I"
+          }
+        ],
+        "text": "Serum IM"
+      }
+    },
+    {
+      "identifier": [
+        {
+          "system": "https://dia.medicover.com/sampleID",
+          "value": "999999999904"
+        }
+      ],
+      "type": {
+        "coding": [
+          {
+            "system": "https://dia.medicover.com/serviceknowledgebase/tube",
+            "code": "SER-D"
+          }
+        ],
+        "text": "Serum DE"
+      }
+    }
+  ]
+}
+```
+##Request
+```sh
+curl -X PUT http://localhost:8080/R4/ServiceRequest/123 -H "Content-Type: application/json" -d '{"resourceType":"ServiceRequest","id":"123","meta":{"versionId":"1","lastUpdated":"2018-11-22T16:02:10.063+00:00"},"identifier":[{"system":"https://dia.medicover.com/sampleID","value":"999999999900"}],"status":"active","intent":"order","code":{"coding":[{"system":"http://snomed.info/sct","code":"108252007"}],"text":"Laboratory procedure"},"orderDetail":[{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"AST"}]},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"ALT"}]},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"Super profile"}]}],"subject":{"reference":"Patient/121"},"authoredOn":"2018-11-22T17:02:07.171+01:00","requester":{"reference":"Practitioner/122"},"performer":[{"reference":"https://dia.medicover.com/logistics/Organization/LAB-PL-GDANSK"}],"supportingInfo":[{"reference":"Specimen/125"},{"reference":"Specimen/126"},{"reference":"QuestionnaireResponse/124"}],"note":[{"text":"Very important comment 1"},{"text":"Very important comment 2"}]}'
+```
+##Response
+Headers:
+```
+X-Powered-By: HAPI FHIR 3.5.0 REST Server (FHIR Server; FHIR 3.4.0/R4)
+ETag: W/"2"
+Transfer-Encoding: chunked
+Server: Jetty(9.4.12.v20180830)
+Content-Location: http://localhost:8080/R4/ServiceRequest/123/_history/2
+Last-Modified: Thu, 22 Nov 2018 16:02:10 GMT
+Content-Type: application/fhir+json; charset=utf-8
+```
+Body:
+```json
+{
+  "resourceType": "ServiceRequest",
+  "id": "123",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-11-22T16:02:10.715+00:00"
+  },
+  "identifier": [
+    {
+      "system": "https://dia.medicover.com/sampleID",
+      "value": "999999999900"
+    }
+  ],
+  "status": "active",
+  "intent": "order",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "108252007"
+      }
+    ],
+    "text": "Laboratory procedure"
+  },
+  "orderDetail": [
+    {
+      "coding": [
+        {
+          "system": "https://dia.medicover.com/serviceknowledgebase/service",
+          "code": "AST"
+        }
+      ]
+    },
+    {
+      "coding": [
+        {
+          "system": "https://dia.medicover.com/serviceknowledgebase/service",
+          "code": "ALT"
+        }
+      ]
+    },
+    {
+      "coding": [
+        {
+          "system": "https://dia.medicover.com/serviceknowledgebase/service",
+          "code": "Super profile"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "reference": "Patient/121"
+  },
+  "authoredOn": "2018-11-22T17:02:07.171+01:00",
+  "requester": {
+    "reference": "Practitioner/122"
+  },
+  "performer": [
+    {
+      "reference": "https://dia.medicover.com/logistics/Organization/LAB-PL-GDANSK"
+    }
+  ],
+  "supportingInfo": [
+    {
+      "reference": "Specimen/125"
+    },
+    {
+      "reference": "Specimen/126"
+    },
+    {
+      "reference": "QuestionnaireResponse/124"
+    }
+  ],
+  "note": [
+    {
+      "text": "Very important comment 1"
+    },
+    {
+      "text": "Very important comment 2"
+    }
+  ]
+}
+```
