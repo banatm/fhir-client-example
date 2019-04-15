@@ -7,10 +7,26 @@ using System.Threading.Tasks;
 
 namespace fhir
 {
-    partial class Program
-    {
+   
         public class SimpleClient: FhirClient
         {
+            public static SimpleClient fapiClient = new SimpleClient(new Uri("http://192.168.9.109:8889/baseDstu3"))
+            {
+                PreferredFormat = ResourceFormat.Json,
+                UseFullResourcePath = false
+            };
+
+            public static SimpleClient localfapiClient = new SimpleClient(new Uri("http://localhost:8081/R4"))
+            {
+                PreferredFormat = ResourceFormat.Json,
+                UseFullResourcePath = false
+            };
+            public static SimpleClient vonkClient =   new SimpleClient(new Uri("http://192.168.9.109:8888"))
+            {
+                PreferredFormat = ResourceFormat.Json                    
+            };
+
+
             public bool UseFullResourcePath { get; set; }
             public SimpleClient(Uri endpoint, bool verifyFhirVersion = false) : base(endpoint, verifyFhirVersion)
             {
@@ -36,10 +52,13 @@ namespace fhir
             private void SimpleClient_OnBeforeRequest(object sender, BeforeRequestEventArgs e)
             {
                 Console.Out.WriteLine("##Request");
-                Console.Out.WriteLine("```sh");
+                Console.Out.WriteLine("```sh");                
+                var json = System.Text.Encoding.UTF8.GetString(e.Body??new byte[0]);
                 Console.Out.WriteLine(
-                    "curl -X {0} {1} -H \"Content-Type: application/json\" -d '{2}'", e.RawRequest.Method,e.RawRequest.Address,System.Text.Encoding.UTF8.GetString(e.Body??new byte[0]));
+                    "curl -X {0} {1} -H \"Content-Type: application/json\" -d '{2}'", e.RawRequest.Method,e.RawRequest.Address,json);
                 Console.Out.WriteLine("```");
+
+                System.IO.File.WriteAllText("data/out.json",json);
             }
 
             public async Task<IEnumerable<string>> ResourcesToStringAsync<T>(Func<T,string> projection) 
@@ -56,5 +75,5 @@ namespace fhir
 
 
         
-    }
+    
 }

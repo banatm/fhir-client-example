@@ -1,0 +1,342 @@
+{    
+    "event":{
+        "EmitedDateTime":"2019-04-02T12:00:00.000",
+        "ProcessedDateTime":"2019-04-02T12:00:00.000",
+        "Producer": "https://dia.medicover.com/Silab/RO/Constanta",
+        "OrderHeaderId": 12312,
+        "CorrelationID":"asd32ijds8f-3284hsf-234ndsf",
+        "EventType":"RESULT_VALIDATED"
+    },
+    
+    "result":
+        {
+            "id": "a2133123312",
+            "filler": {
+                "identifier": [
+                  {
+                    "system": "https://dia.medicover.com/Silab/RO/Constanta/SiteID",
+                    "value": "2"
+                  }
+                ],
+                "name": "Synevo Laboratory in Constanta",
+                "address": [
+                  {
+                    "streetName": "Calea Victoriei",
+                    "streetNo": "12",
+                    "appartmentNo": "123",
+                    "postCode": "123",
+                    "city": "Constanta",
+                    "countryCode": "RO"
+                  }
+                ],
+                "email": "test@sdcc.ro",
+                "phoneNo": "123-123-123"
+              },
+            "documentDateTime": "2019-04-02T12:00:00.000",
+            "status": "",
+            "isPaid": true,            
+                "order": {
+                    "identifier": [
+                        {
+                          "system": "https://dia.medicover.com/Silab/RO/Constanta/OrderHeaderID",
+                          "value": "1234511"
+                        },
+                        {
+                          "system": "https://dia.medicover.com/fhir/ro/operational",
+                          "value": "2312212341av"
+                        },                        
+                        {
+                          "system": "https://dia.medicover.com/fhir/ro/preordering",
+                          "value": "2312212341av232"
+                        },
+                        {
+                            "system": "https://synevo.ua/preordering/hl7/AVIVA",
+                            "value": "23122kfksv"
+                          }
+                    ],
+                    "barCode": "121234243a",                   
+                    "placer": {
+                        "identifier": [
+                          {
+                            "system": "https://dia.medicover.com/Silab/RO/Constanta/ClientID",
+                            "value": "12345a"
+                          }
+                        ],
+                        "code": "MCV",
+                        "name": "Medicover HQ",
+                        "address": [
+                          {
+                            "streetName": "Calea Victoriei",
+                            "streetNo": "12",
+                            "appartmentNo": "123",
+                            "postCode": "123",
+                            "city": "Bucharest",
+                            "countryCode": "RO",
+                            "type": "main"
+                          }
+                        ],
+                        "email": "test@sdcc.ro",
+                        "phoneNo": "123-123-123"
+                      },
+                    "placementDateTime": "2019-04-04T08:23:23.001",
+                    "patient": {
+                        "identifier": [
+                          {
+                            "system": "https://dia.medicover.com/Silab/RO/Constanta/PatientID",
+                            "value": "12345"
+                          },
+                          {
+                            "system": "http://www.dgepmb.ro/CNP",
+                            "value": "2131433"
+                          }
+                        ],
+                        "name": "Maria",
+                        "surname": "Popa",
+                        "birthdate": "1990-01-01",
+                        "gender": "female",
+                        "address": [
+                          {
+                            "streetName": "Calea Victoriei",
+                            "streetNo": "12",
+                            "appartmentNo": "123",
+                            "postCode": "123",
+                            "city": "Bucharest",
+                            "countryCode": "RO",
+                            "type": "main"
+                          }
+                        ],
+                        "email": "test@sdcc.ro",
+                        "phoneNo": "123-123-123"
+                      },
+                    "contract":{
+                        "id": "12133132a",
+                        "code": "FFS",
+                        "name": "FFS Contract"
+                    },
+                    "doctor": {
+                        "identifier": [
+                          {
+                            "system": "https://dia.medicover.com/Silab/RO/Constanta/DoctorID",
+                            "value": "12345"
+                          },
+                          {
+                            "system": "https://regmed.cmr.ro/",
+                            "value": "2131"
+                          }
+                        ],
+                        "name": "Maria",
+                        "surname": "Popescu",
+                        "birthdate": "1980-01-01",
+                        "gender": "female",
+                        "address": [
+                          {
+                            "streetName": "Calea Victoriei",
+                            "streetNo": "12",
+                            "appartmentNo": "123",
+                            "postCode": "123",
+                            "city": "Bucharest",
+                            "countryCode": "RO",
+                            "type": "main"
+                          }
+                        ],
+                        "email": "test@sdcc.ro",
+                        "phoneNo": "123-123-123"
+                      },
+                    "comment": "asdsads s sdfadsa adf adf ads fads",
+                    "clientUnit":{
+                        "identifier": [
+                            {
+                              "system": "https://dia.medicover.com/Silab/RO/Constanta/ClientUnitID",
+                              "value": "12345a"
+                            }
+                          ],
+                        "code": "MCV_CO",
+                        "name": "Medicover Constanta",
+                        "address": [
+                            {
+                              "streetName": "abrakadabra",
+                              "streetNo": "12",
+                              "appartmentNo": "123",
+                              "postCode": "123",
+                              "city": "Constanta",
+                              "countryCode": "RO"
+                            }
+                          ],
+                          "email": "test@sdcc.ro",
+                          "phoneNo": "123-123-123"
+                    }
+                },
+                "serviceResults": [
+                    {
+                        "id": "2133123132a",
+                        "code": "CH02",
+                        "name": "Lipid profile",
+                        "material": {
+                            "code": "SDDFD",
+                            "name": "Blood",
+                            "system": "SILAB"
+                        },
+                        "drawDateTime": "2019-04-05T08:23:23.002",
+                        "resultDateTime": "2019-04-06T08:23:23.002",
+                        "comment": "Sample comment",
+                        "medicalValidator": {
+                            "identifier": [
+                              {
+                                "system": "https://dia.medicover.com/Silab/RO/Constanta",
+                                "value": "12345a"
+                              },
+                              {
+                                "system": "https://lab.doctors.ro",
+                                "value": "2131"
+                              }
+                            ],
+                            "name": "Maria",
+                            "surname": "Popa",
+                            "birthdate": "1990-01-01",
+                            "gender": "female",
+                            "address": [
+                              {
+                                "streetName": "Calea Victoriei",
+                                "streetNo": "12",
+                                "appartmentNo": "123",
+                                "postCode": "123",
+                                "city": "Bucharest",
+                                "countryCode": "RO",
+                                "type": "main"
+                              }
+                            ],
+                            "email": "test@sdcc.ro",
+                            "phoneNo": "123-123-123"
+                          },
+                        "testResultParameters": [
+                            {
+                                "id": "2333244324324234",
+                                "code": "CHOL",
+                                "name": "Cholesterol total",                                
+                                "unit": "mg/dL",
+                                "comment": "Sample long comment.",
+                                "value": {
+                                    "textValue": "",
+                                    "numericValue": 12313
+                                },
+                                "referenceRange": {
+                                    "text": "Sample text",
+                                    "numericLower": 123,
+                                    "numericUpper": 321
+                                },
+                                "flags":[{                                 
+                                    "code": "HH",
+                                    "name": "Very High"
+                                },{                                 
+                                  "code": "A",
+                                  "name": "Abnormal"
+                              }]
+                            },
+                            {
+                              "id": "2333244324324234",
+                              "code": "LDL",
+                              "name": "Cholesterol LDL",                                
+                              "unit": "mg/dL",
+                              "comment": "Sample long comment.",
+                              "value": {
+                                  "textValue": "<50"                                  
+                              },
+                              "referenceRange": {
+                                  "text": "Sample text",
+                                  "numericLower": 123,
+                                  "numericUpper": 321
+                              }
+                          },
+                          {
+                            "id": "2333244324324234",
+                            "code": "CHOL",
+                            "name": "Cholesterol HDL",                                                            
+                            "comment": "Sample long comment.",
+                            "value": {
+                                "textValue": "too big"                                
+                            },
+                            "referenceRange": {
+                                "text": "Normal"
+                            },
+                            "flags":[{                                 
+                              "code": "A",
+                              "name": "Abnormal"
+                          }]
+                        }
+                            
+                        ]
+                    },
+                    {
+                      "id": "2133123132b",
+                      "code": "CH01",
+                      "name": "Aminotransferaza analinowa ALT",
+                      "material": {
+                          "code": "SDDFD",
+                          "name": "Blood",
+                          "system": "SILAB"
+                      },
+                      "drawDateTime": "2019-04-05T08:23:23.002",
+                      "resultDateTime": "2019-04-06T08:23:23.002",
+                      "comment": "Sample comment2",
+                      "medicalValidator": {
+                          "identifier": [
+                            {
+                              "system": "https://dia.medicover.com/Silab/RO/Constanta",
+                              "value": "12345b"
+                            },
+                            {
+                              "system": "https://lab.doctors.ro",
+                              "value": "2132"
+                            }
+                          ],
+                          "name": "Marianna",
+                          "surname": "Popescu",
+                          "birthdate": "1990-01-01",
+                          "gender": "female",
+                          "address": [
+                            {
+                              "streetName": "Calea Victoriei",
+                              "streetNo": "12",
+                              "appartmentNo": "123",
+                              "postCode": "123",
+                              "city": "Constanta",
+                              "countryCode": "RO",
+                              "type": "main"
+                            }
+                          ],
+                          "email": "test@sdcc.ro",
+                          "phoneNo": "123-123-123"
+                        },
+                      "testResultParameters": [
+                          {
+                              "id": "2333244324324234",
+                              "code": "ALT",
+                              "name": "ALT TOTAL",                                
+                              "unit": "U/l",
+                              "comment": "Sample long comment.",
+                              "value": {
+                                  "textValue": "41",
+                                  "numericValue": 41
+                              },
+                              "referenceRange": {
+                                  "text": "< 40",                                  
+                                  "numericUpper": 40
+                              },
+                              "flags":[{                                 
+                                  "code": "H",
+                                  "name": "High"
+                              },{                                 
+                                "code": "A",
+                                "name": "Abnormal"
+                            }]
+                      }                          
+                      ]
+                  }
+                ],            
+            "rawDocument": "base64 representation of the content of the document",
+            "version": "20190202.1"
+        }
+    
+    
+}
+  
