@@ -4,9 +4,37 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Fhir.Utility;
 
 namespace fhir
 {
+    class MyTransactionBuilder
+    {
+        private Bundle _bundle = new Bundle(){Type=Bundle.BundleType.Transaction};
+        public Uri BaseUrl{get;set;}
+        public void Create(Resource r)
+        {
+            var newEntry = new Bundle.EntryComponent();
+            newEntry.Request = new Bundle.RequestComponent();
+            newEntry.Request.Method = Bundle.HTTPVerb.POST;    
+            newEntry.Resource = r;            
+            newEntry.Request.Url = new RestUrl(BaseUrl).AddPath(r.TypeName).ToString();
+            newEntry.FullUrl = r.Id.ToString();
+            _bundle.Entry.Add(newEntry);
+        }
+
+        public Bundle ToBundle()
+        {
+            
+            _bundle.Entry.ForEach(e=>
+                {
+                    //clear resources id if urn based in POST event
+                    if (e.Request.Method==Bundle.HTTPVerb.POST && e.Resource.Id.StartsWith("urn")) e.Resource.Id=null;                    
+                });
+            return _bundle;
+        }
+    }
+
     public class ResultResources
     {
         public SimpleClient client { get; set; }
@@ -21,7 +49,7 @@ namespace fhir
 
             var now = new FhirDateTime(DateTime.Now);
             Console.Out.WriteLine("#Create Bundle");
-            var builder = new TransactionBuilder(this.client.Endpoint);
+            var builder = new MyTransactionBuilder(){BaseUrl=this.client.Endpoint};
             
             var patient = createPatient();
             builder.Create(patient);
