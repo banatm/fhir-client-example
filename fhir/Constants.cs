@@ -33,6 +33,7 @@ namespace fhir
         internal static readonly string ORGTYPE_CLIENT_UNIT = "ClientUnit";
         internal static readonly string CONTRACT_SILABHQ_CODING_SYSTEM = "https://dia.medicover.com/Silab/RO/HQ";
         internal static readonly string CONTRACT_CODING_SYSTEM = "https://dia.medicover.com/retail/Contract";
+        internal static readonly string BARCODE_CODING_SYSTEM = "https://dia.medicover.com/barcode";
 
         internal static readonly string SERVICES_CODING_SYSTEM = "https://dia.medicover.com/serviceknowledgebase/service";
         internal static readonly string SERVICE_PARAMETERS_CODING_SYSTEM = "https://dia.medicover.com/serviceknowledgebase/service/{0}/parameters";

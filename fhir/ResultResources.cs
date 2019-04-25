@@ -79,6 +79,9 @@ namespace fhir
                                                              });         
             builder.Create(order);
 
+            var task = createTask(order,performer);
+            builder.Create(task);
+
             List<Practitioner> labdoctors;
             var observations = createObservations(patient,order,performer,out labdoctors);
             
@@ -98,12 +101,27 @@ namespace fhir
 
         }
 
+        private Task createTask(ServiceRequest order, Organization performer)
+        {
+            return new Task(){
+                Id=Uuid.Generate().ToString(),
+                Focus=order.BundleRef(),
+                Intent=Task.TaskIntent.Order,
+                Status=Task.TaskStatus.Completed,
+                Owner=performer.BundleRef(),
+                Identifier = model.Result.Order.Identifier.Where(x=>x.System.Contains("OrderHeaderID")).Select(x=>new Identifier(x.System,x.Value)).ToList(),
+                ExecutionPeriod=new Period(new FhirDateTime(model.Result.Order.PlacementDateTime),new FhirDateTime(model.Result.DocumentDateTime)),
+                AuthoredOn=model.Result.Order.PlacementDateTime.ToString(Constants.DATE_FORMAT),
+                LastModified=DateTime.Now.ToString(Constants.DATE_FORMAT),                
+            };
+        }
+
         private DiagnosticReport createDiagnosticsReport(ServiceRequest order, Patient p,IEnumerable<ResourceReference> producers,IEnumerable<ResourceReference> consumers,List<Observation> observations)
         {
             return new DiagnosticReport(){
                 Id=Uuid.Generate().ToString(),
                 Identifier = new List<Identifier>(){new Identifier(model.Event.Producer,$"{model.Result.Id}/{model.Result.Version}")},
-                BasedOn=new List<ResourceReference>{order.BundleRef()},
+                BasedOn=new List<ResourceReference>{order.BundleRef()},            
                 Code=Constants.ORDER_PROCEDURE_REQUEST_CODE,
                 Subject=p.BundleRef(),
                 Performer= producers.ToList(),
@@ -260,7 +278,7 @@ namespace fhir
                 Subject = patient.BundleRef(),
                 Requester = doctor.BundleRef(),
                 SupportingInfo = supportingInfo,
-                
+                Identifier= mo.Identifier.Select(x=>new Identifier(x.System,x.Value)).Append(new Identifier(Constants.BARCODE_CODING_SYSTEM,mo.BarCode)).ToList(),
                 OrderDetail = model.Result.ServiceResults.Select(sc => new CodeableConcept(Constants.SERVICES_CODING_SYSTEM ,sc.Id )).ToList(),
                 Performer = new List<ResourceReference>{performer.BundleRef()},
                 Note = new List<Annotation> {

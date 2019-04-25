@@ -78,7 +78,8 @@ namespace fhir.model
     {
         [JsonProperty("id")]
         public string Id { get; set; }
-
+        [JsonProperty("identifier")]
+        public Identifier[] Identifier { get; set; }
         [JsonProperty("barCode")]
         public string BarCode { get; set; }
 

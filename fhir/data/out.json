@@ -1,1 +1,685 @@
-{"resourceType":"Bundle","type":"transaction","entry":[{"fullUrl":"urn:uuid:297350a4-ed71-4e5e-80ed-16e91d1b4f72","resource":{"resourceType":"Patient","identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta/PatientID","value":"12345"},{"system":"http://www.dgepmb.ro/CNP","value":"2131433"}],"name":[{"family":"Popa","given":["Maria"]}],"telecom":[{"system":"email","value":"test@sdcc.ro"},{"system":"phone","value":"123-123-123"}],"gender":"unknown","birthDate":"1990-01-01T00:00:00","address":[{"line":["Calea Victoriei 12 123"],"city":"Bucharest","postalCode":"123","country":"RO"}]},"request":{"method":"POST","url":"http://localhost:8080/R4/Patient"}},{"fullUrl":"urn:uuid:83fd09f5-051a-4d3d-a9be-a9c37190b054","resource":{"resourceType":"Practitioner","extension":[{"url":"https://dia.medicover.com/organization/practitioner/type","valueCodeableConcept":{"coding":[{"system":"https://dia.medicover.com/organization/practitioner/type","code":"RefferingDoctor"}]}}],"identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta/DoctorID","value":"12345"},{"system":"https://regmed.cmr.ro/","value":"2131"}],"name":[{"family":"Popescu","given":["Maria"]}],"telecom":[{"system":"email","value":"test@sdcc.ro"},{"system":"phone","value":"123-123-123"}],"address":[{"line":["Calea Victoriei 12 123"],"city":"Bucharest","postalCode":"123","country":"RO"}],"gender":"unknown","birthDate":"1980-01-01T00:00:00"},"request":{"method":"POST","url":"http://localhost:8080/R4/Practitioner"}},{"fullUrl":"urn:uuid:d6c0b1ea-fb63-42ac-813c-6cc436920f22","resource":{"resourceType":"Organization","identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta/SiteID","value":"2"}],"type":[{"coding":[{"system":"https://dia.medicover.com/OrganizationType/","code":"Laboratory"}]}],"name":"Synevo Laboratory in Constanta","address":[{"line":["Calea Victoriei 12 123"],"city":"Constanta","postalCode":"123","country":"RO"}]},"request":{"method":"POST","url":"http://localhost:8080/R4/Organization"}},{"fullUrl":"urn:uuid:14af4380-0640-457d-806d-34e0fd13eb10","resource":{"resourceType":"Organization","identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta/ClientID","value":"12345a"}],"type":[{"coding":[{"system":"https://dia.medicover.com/OrganizationType/","code":"Client"}]}],"name":"Medicover HQ","address":[{"line":["Calea Victoriei 12 123"],"city":"Bucharest","postalCode":"123","country":"RO"}]},"request":{"method":"POST","url":"http://localhost:8080/R4/Organization"}},{"fullUrl":"urn:uuid:f88a8117-9a3a-4529-a235-79e3246d8b0c","resource":{"resourceType":"Organization","identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta/ClientUnitID","value":"12345a"}],"type":[{"coding":[{"system":"https://dia.medicover.com/OrganizationType/","code":"ClientUnit"}]}],"name":"Medicover Constanta","address":[{"line":["abrakadabra 12 123"],"city":"Constanta","postalCode":"123","country":"RO"}],"partOf":{"reference":"urn:uuid:14af4380-0640-457d-806d-34e0fd13eb10"}},"request":{"method":"POST","url":"http://localhost:8080/R4/Organization"}},{"fullUrl":"urn:uuid:8e0138fd-f853-486e-b646-6983bd066c7e","resource":{"resourceType":"Contract","identifier":[{"system":"https://dia.medicover.com/Silab/RO/HQ","value":"12133132a"},{"system":"https://dia.medicover.com/retail/Contract","value":"FFS"}],"name":"FFS Contract"},"request":{"method":"POST","url":"http://localhost:8080/R4/Contract"}},{"fullUrl":"urn:uuid:51b8933c-816f-4825-90f2-ac6ee1e0cbf1","resource":{"resourceType":"ServiceRequest","status":"completed","intent":"order","code":{"coding":[{"system":"http://snomed.info/sct","code":"108252007"}],"text":"Laboratory procedure"},"orderDetail":[{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"2133123132a"}]},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"2133123132b"}]}],"subject":{"reference":"urn:uuid:297350a4-ed71-4e5e-80ed-16e91d1b4f72"},"authoredOn":"2019-04-04T08:23:23","requester":{"reference":"urn:uuid:83fd09f5-051a-4d3d-a9be-a9c37190b054"},"performer":[{"reference":"urn:uuid:d6c0b1ea-fb63-42ac-813c-6cc436920f22"}],"supportingInfo":[{"reference":"urn:uuid:14af4380-0640-457d-806d-34e0fd13eb10"},{"reference":"urn:uuid:f88a8117-9a3a-4529-a235-79e3246d8b0c"},{"reference":"urn:uuid:8e0138fd-f853-486e-b646-6983bd066c7e"}],"note":[{"text":"asdsads s sdfadsa adf adf ads fads"}]},"request":{"method":"POST","url":"http://localhost:8080/R4/ServiceRequest"}},{"fullUrl":"urn:uuid:682544eb-74f1-42d7-a731-361128df612e","resource":{"resourceType":"Practitioner","extension":[{"url":"https://dia.medicover.com/organization/practitioner/type","valueCodeableConcept":{"coding":[{"system":"https://dia.medicover.com/organization/practitioner/type","code":"LaboratoryDoctor"}]}}],"identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta","value":"12345a"},{"system":"https://lab.doctors.ro","value":"2131"}],"name":[{"family":"Popa","given":["Maria"]}],"telecom":[{"system":"email","value":"test@sdcc.ro"},{"system":"phone","value":"123-123-123"}],"address":[{"line":["Calea Victoriei 12 123"],"city":"Bucharest","postalCode":"123","country":"RO"}],"gender":"unknown","birthDate":"1990-01-01T00:00:00"},"request":{"method":"POST","url":"http://localhost:8080/R4/Practitioner"}},{"fullUrl":"urn:uuid:24221418-38bf-4f32-bd1f-87f97ba1b5b2","resource":{"resourceType":"Practitioner","extension":[{"url":"https://dia.medicover.com/organization/practitioner/type","valueCodeableConcept":{"coding":[{"system":"https://dia.medicover.com/organization/practitioner/type","code":"LaboratoryDoctor"}]}}],"identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta","value":"12345b"},{"system":"https://lab.doctors.ro","value":"2132"}],"name":[{"family":"Popescu","given":["Marianna"]}],"telecom":[{"system":"email","value":"test@sdcc.ro"},{"system":"phone","value":"123-123-123"}],"address":[{"line":["Calea Victoriei 12 123"],"city":"Constanta","postalCode":"123","country":"RO"}],"gender":"unknown","birthDate":"1990-01-01T00:00:00"},"request":{"method":"POST","url":"http://localhost:8080/R4/Practitioner"}},{"fullUrl":"urn:uuid:3cad32ff-6a01-4857-86ae-de47e7aacf0c","resource":{"resourceType":"Observation","basedOn":[{"reference":"urn:uuid:51b8933c-816f-4825-90f2-ac6ee1e0cbf1"}],"status":"final","category":[{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/observation-category","code":"laboratory"}]}],"code":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"2133123132a"}],"text":"[CH02] Lipid profile"},"subject":{"reference":"urn:uuid:297350a4-ed71-4e5e-80ed-16e91d1b4f72"},"issued":"2019-04-06T08:23:23.002+00:00","performer":[{"reference":"urn:uuid:d6c0b1ea-fb63-42ac-813c-6cc436920f22"},{"reference":"urn:uuid:682544eb-74f1-42d7-a731-361128df612e"}],"component":[{"code":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service/2133123132a/parameters","code":"2333244324324234"}],"text":"[CHOL] Cholesterol total"},"valueQuantity":{"value":12313,"unit":"mg/dL","system":"http://unitsofmeasure.org","code":"mg/dL"},"interpretation":[{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/interpretation_flags","code":"HH"}],"text":"Very High"},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/interpretation_flags","code":"A"}],"text":"Abnormal"}],"referenceRange":[{"low":{"value":123},"high":{"value":321},"text":"Sample text"}]},{"code":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service/2133123132a/parameters","code":"2333244324324234"}],"text":"[LDL] Cholesterol LDL"},"valueQuantity":{"value":50,"comparator":"<","unit":"mg/dL","system":"http://unitsofmeasure.org","code":"mg/dL"},"referenceRange":[{"low":{"value":123},"high":{"value":321},"text":"Sample text"}]},{"code":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service/2133123132a/parameters","code":"2333244324324234"}],"text":"[CHOL] Cholesterol HDL"},"valueString":"too big","interpretation":[{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/interpretation_flags","code":"A"}],"text":"Abnormal"}],"referenceRange":[{"text":"Normal"}]}]},"request":{"method":"POST","url":"http://localhost:8080/R4/Observation"}},{"fullUrl":"urn:uuid:eddf7980-8fee-4dc0-b676-33bc01623141","resource":{"resourceType":"Observation","basedOn":[{"reference":"urn:uuid:51b8933c-816f-4825-90f2-ac6ee1e0cbf1"}],"status":"final","category":[{"coding":[{"system":"http://terminology.hl7.org/CodeSystem/observation-category","code":"laboratory"}]}],"code":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service","code":"2133123132b"}],"text":"[CH01] Aminotransferaza analinowa ALT"},"subject":{"reference":"urn:uuid:297350a4-ed71-4e5e-80ed-16e91d1b4f72"},"issued":"2019-04-06T08:23:23.002+00:00","performer":[{"reference":"urn:uuid:d6c0b1ea-fb63-42ac-813c-6cc436920f22"},{"reference":"urn:uuid:24221418-38bf-4f32-bd1f-87f97ba1b5b2"}],"component":[{"code":{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/service/2133123132b/parameters","code":"2333244324324234"}],"text":"[ALT] ALT TOTAL"},"valueQuantity":{"value":41,"unit":"U/l","system":"http://unitsofmeasure.org","code":"U/l"},"interpretation":[{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/interpretation_flags","code":"H"}],"text":"High"},{"coding":[{"system":"https://dia.medicover.com/serviceknowledgebase/interpretation_flags","code":"A"}],"text":"Abnormal"}],"referenceRange":[{"high":{"value":40},"text":"< 40"}]}]},"request":{"method":"POST","url":"http://localhost:8080/R4/Observation"}},{"fullUrl":"urn:uuid:f4270b29-363c-4abf-8138-af0d6aae64e8","resource":{"resourceType":"DiagnosticReport","identifier":[{"system":"https://dia.medicover.com/Silab/RO/Constanta","value":"a2133123312/20190202.1"}],"basedOn":[{"reference":"urn:uuid:51b8933c-816f-4825-90f2-ac6ee1e0cbf1"}],"code":{"coding":[{"system":"http://snomed.info/sct","code":"108252007"}],"text":"Laboratory procedure"},"subject":{"reference":"urn:uuid:297350a4-ed71-4e5e-80ed-16e91d1b4f72"},"performer":[{"reference":"urn:uuid:682544eb-74f1-42d7-a731-361128df612e"},{"reference":"urn:uuid:24221418-38bf-4f32-bd1f-87f97ba1b5b2"},{"reference":"urn:uuid:d6c0b1ea-fb63-42ac-813c-6cc436920f22"}],"resultsInterpreter":[{"reference":"urn:uuid:14af4380-0640-457d-806d-34e0fd13eb10"},{"reference":"urn:uuid:f88a8117-9a3a-4529-a235-79e3246d8b0c"},{"reference":"urn:uuid:83fd09f5-051a-4d3d-a9be-a9c37190b054"}],"result":[{"reference":"urn:uuid:3cad32ff-6a01-4857-86ae-de47e7aacf0c"},{"reference":"urn:uuid:eddf7980-8fee-4dc0-b676-33bc01623141"}],"presentedForm":[{"contentType":"application/pdf","language":"en","data":"AQIDBAUGBw==","size":100,"hash":"AQID","title":"Report","creation":"2019-04-02T12:00:00"},{"contentType":"application/pdf","language":"ro","data":"AQIDBAUGBw==","size":100,"hash":"AQID","title":"Report","creation":"2019-04-02T12:00:00"}]},"request":{"method":"POST","url":"http://localhost:8080/R4/DiagnosticReport"}}]}
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:765c8d84-7718-47e7-ba98-d24f2372fc61",
+      "resource": {
+        "resourceType": "Patient",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/PatientID",
+            "value": "12345"
+          },
+          { "system": "http://www.dgepmb.ro/CNP", "value": "2131433" }
+        ],
+        "name": [{ "family": "Popa", "given": ["Maria"] }],
+        "telecom": [
+          { "system": "email", "value": "test@sdcc.ro" },
+          { "system": "phone", "value": "123-123-123" }
+        ],
+        "gender": "unknown",
+        "birthDate": "1990-01-01T00:00:00",
+        "address": [
+          {
+            "line": ["Calea Victoriei 12 123"],
+            "city": "Bucharest",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Patient"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e87bb104-d274-4bd6-bea4-532c8b52a180",
+      "resource": {
+        "resourceType": "Practitioner",
+        "extension": [
+          {
+            "url": "https://dia.medicover.com/organization/practitioner/type",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/organization/practitioner/type",
+                  "code": "RefferingDoctor"
+                }
+              ]
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/DoctorID",
+            "value": "12345"
+          },
+          { "system": "https://regmed.cmr.ro/", "value": "2131" }
+        ],
+        "name": [{ "family": "Popescu", "given": ["Maria"] }],
+        "telecom": [
+          { "system": "email", "value": "test@sdcc.ro" },
+          { "system": "phone", "value": "123-123-123" }
+        ],
+        "address": [
+          {
+            "line": ["Calea Victoriei 12 123"],
+            "city": "Bucharest",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ],
+        "gender": "unknown",
+        "birthDate": "1980-01-01T00:00:00"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Practitioner"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a4de4778-7c23-4c59-bd26-be515c52ca9b",
+      "resource": {
+        "resourceType": "Organization",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/SiteID",
+            "value": "2"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://dia.medicover.com/OrganizationType/",
+                "code": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "name": "Synevo Laboratory in Constanta",
+        "address": [
+          {
+            "line": ["Calea Victoriei 12 123"],
+            "city": "Constanta",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Organization"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2250e68e-53e2-4d73-873b-4293ab3188d2",
+      "resource": {
+        "resourceType": "Organization",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/ClientID",
+            "value": "12345a"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://dia.medicover.com/OrganizationType/",
+                "code": "Client"
+              }
+            ]
+          }
+        ],
+        "name": "Medicover HQ",
+        "address": [
+          {
+            "line": ["Calea Victoriei 12 123"],
+            "city": "Bucharest",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Organization"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ff471ec5-c505-4098-a62d-421264061182",
+      "resource": {
+        "resourceType": "Organization",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/ClientUnitID",
+            "value": "12345a"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://dia.medicover.com/OrganizationType/",
+                "code": "ClientUnit"
+              }
+            ]
+          }
+        ],
+        "name": "Medicover Constanta",
+        "address": [
+          {
+            "line": ["abrakadabra 12 123"],
+            "city": "Constanta",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ],
+        "partOf": {
+          "reference": "urn:uuid:2250e68e-53e2-4d73-873b-4293ab3188d2"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Organization"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b4832cae-369d-4d77-8dc2-8a0c1cb88ff6",
+      "resource": {
+        "resourceType": "Contract",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/HQ",
+            "value": "12133132a"
+          },
+          {
+            "system": "https://dia.medicover.com/retail/Contract",
+            "value": "FFS"
+          }
+        ],
+        "name": "FFS Contract"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Contract"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7e309b16-b35f-44cb-9936-824225d841d6",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/OrderHeaderID",
+            "value": "1234511"
+          },
+          {
+            "system": "https://dia.medicover.com/fhir/ro/operational",
+            "value": "2312212341av"
+          },
+          {
+            "system": "https://dia.medicover.com/fhir/ro/preordering",
+            "value": "2312212341av232"
+          },
+          {
+            "system": "https://synevo.ua/preordering/hl7/AVIVA",
+            "value": "23122kfksv"
+          },
+          {
+            "system": "https://dia.medicover.com/barcode",
+            "value": "121234243a"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "code": {
+          "coding": [
+            { "system": "http://snomed.info/sct", "code": "108252007" }
+          ],
+          "text": "Laboratory procedure"
+        },
+        "orderDetail": [
+          {
+            "coding": [
+              {
+                "system": "https://dia.medicover.com/serviceknowledgebase/service",
+                "code": "2133123132a"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "https://dia.medicover.com/serviceknowledgebase/service",
+                "code": "2133123132b"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:765c8d84-7718-47e7-ba98-d24f2372fc61"
+        },
+        "authoredOn": "2019-04-04T08:23:23",
+        "requester": {
+          "reference": "urn:uuid:e87bb104-d274-4bd6-bea4-532c8b52a180"
+        },
+        "performer": [
+          { "reference": "urn:uuid:a4de4778-7c23-4c59-bd26-be515c52ca9b" }
+        ],
+        "supportingInfo": [
+          { "reference": "urn:uuid:2250e68e-53e2-4d73-873b-4293ab3188d2" },
+          { "reference": "urn:uuid:ff471ec5-c505-4098-a62d-421264061182" },
+          { "reference": "urn:uuid:b4832cae-369d-4d77-8dc2-8a0c1cb88ff6" }
+        ],
+        "note": [{ "text": "asdsads s sdfadsa adf adf ads fads" }]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/ServiceRequest"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e690ff05-0f84-4c61-9d51-c7dd01e026fc",
+      "resource": {
+        "resourceType": "Task",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta/OrderHeaderID",
+            "value": "1234511"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "focus": {
+          "reference": "urn:uuid:7e309b16-b35f-44cb-9936-824225d841d6"
+        },
+        "executionPeriod": {
+          "start": "2019-04-04T08:23:23.001+00:00",
+          "end": "2019-04-02T12:00:00+00:00"
+        },
+        "authoredOn": "2019-04-04T08:23:23",
+        "lastModified": "2019-04-24T14:27:43",
+        "owner": {
+          "reference": "urn:uuid:a4de4778-7c23-4c59-bd26-be515c52ca9b"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Task"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:886f95ab-9bbc-40de-9a67-9185043e71c6",
+      "resource": {
+        "resourceType": "Practitioner",
+        "extension": [
+          {
+            "url": "https://dia.medicover.com/organization/practitioner/type",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/organization/practitioner/type",
+                  "code": "LaboratoryDoctor"
+                }
+              ]
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta",
+            "value": "12345a"
+          },
+          { "system": "https://lab.doctors.ro", "value": "2131" }
+        ],
+        "name": [{ "family": "Popa", "given": ["Maria"] }],
+        "telecom": [
+          { "system": "email", "value": "test@sdcc.ro" },
+          { "system": "phone", "value": "123-123-123" }
+        ],
+        "address": [
+          {
+            "line": ["Calea Victoriei 12 123"],
+            "city": "Bucharest",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ],
+        "gender": "unknown",
+        "birthDate": "1990-01-01T00:00:00"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Practitioner"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:85c02a21-d6d3-4938-ad8f-ce16ff7a6305",
+      "resource": {
+        "resourceType": "Practitioner",
+        "extension": [
+          {
+            "url": "https://dia.medicover.com/organization/practitioner/type",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/organization/practitioner/type",
+                  "code": "LaboratoryDoctor"
+                }
+              ]
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta",
+            "value": "12345b"
+          },
+          { "system": "https://lab.doctors.ro", "value": "2132" }
+        ],
+        "name": [{ "family": "Popescu", "given": ["Marianna"] }],
+        "telecom": [
+          { "system": "email", "value": "test@sdcc.ro" },
+          { "system": "phone", "value": "123-123-123" }
+        ],
+        "address": [
+          {
+            "line": ["Calea Victoriei 12 123"],
+            "city": "Constanta",
+            "postalCode": "123",
+            "country": "RO"
+          }
+        ],
+        "gender": "unknown",
+        "birthDate": "1990-01-01T00:00:00"
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Practitioner"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:551d3f69-32b5-4d0f-a6e6-31a1211534d6",
+      "resource": {
+        "resourceType": "Observation",
+        "basedOn": [
+          { "reference": "urn:uuid:7e309b16-b35f-44cb-9936-824225d841d6" }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://dia.medicover.com/serviceknowledgebase/service",
+              "code": "2133123132a"
+            }
+          ],
+          "text": "[CH02] Lipid profile"
+        },
+        "subject": {
+          "reference": "urn:uuid:765c8d84-7718-47e7-ba98-d24f2372fc61"
+        },
+        "issued": "2019-04-06T08:23:23.002+00:00",
+        "performer": [
+          { "reference": "urn:uuid:a4de4778-7c23-4c59-bd26-be515c52ca9b" },
+          { "reference": "urn:uuid:886f95ab-9bbc-40de-9a67-9185043e71c6" }
+        ],
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/serviceknowledgebase/service/2133123132a/parameters",
+                  "code": "2333244324324234"
+                }
+              ],
+              "text": "[CHOL] Cholesterol total"
+            },
+            "valueQuantity": {
+              "value": 12313,
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "interpretation": [
+              {
+                "coding": [
+                  {
+                    "system": "https://dia.medicover.com/serviceknowledgebase/interpretation_flags",
+                    "code": "HH"
+                  }
+                ],
+                "text": "Very High"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "https://dia.medicover.com/serviceknowledgebase/interpretation_flags",
+                    "code": "A"
+                  }
+                ],
+                "text": "Abnormal"
+              }
+            ],
+            "referenceRange": [
+              {
+                "low": { "value": 123 },
+                "high": { "value": 321 },
+                "text": "Sample text"
+              }
+            ]
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/serviceknowledgebase/service/2133123132a/parameters",
+                  "code": "2333244324324234"
+                }
+              ],
+              "text": "[LDL] Cholesterol LDL"
+            },
+            "valueQuantity": {
+              "value": 50,
+              "comparator": "<",
+              "unit": "mg/dL",
+              "system": "http://unitsofmeasure.org",
+              "code": "mg/dL"
+            },
+            "referenceRange": [
+              {
+                "low": { "value": 123 },
+                "high": { "value": 321 },
+                "text": "Sample text"
+              }
+            ]
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/serviceknowledgebase/service/2133123132a/parameters",
+                  "code": "2333244324324234"
+                }
+              ],
+              "text": "[CHOL] Cholesterol HDL"
+            },
+            "valueString": "too big",
+            "interpretation": [
+              {
+                "coding": [
+                  {
+                    "system": "https://dia.medicover.com/serviceknowledgebase/interpretation_flags",
+                    "code": "A"
+                  }
+                ],
+                "text": "Abnormal"
+              }
+            ],
+            "referenceRange": [{ "text": "Normal" }]
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:440a53ad-f74b-4c31-93bd-e8dbde68f6c4",
+      "resource": {
+        "resourceType": "Observation",
+        "basedOn": [
+          { "reference": "urn:uuid:7e309b16-b35f-44cb-9936-824225d841d6" }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://dia.medicover.com/serviceknowledgebase/service",
+              "code": "2133123132b"
+            }
+          ],
+          "text": "[CH01] Aminotransferaza analinowa ALT"
+        },
+        "subject": {
+          "reference": "urn:uuid:765c8d84-7718-47e7-ba98-d24f2372fc61"
+        },
+        "issued": "2019-04-06T08:23:23.002+00:00",
+        "performer": [
+          { "reference": "urn:uuid:a4de4778-7c23-4c59-bd26-be515c52ca9b" },
+          { "reference": "urn:uuid:85c02a21-d6d3-4938-ad8f-ce16ff7a6305" }
+        ],
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://dia.medicover.com/serviceknowledgebase/service/2133123132b/parameters",
+                  "code": "2333244324324234"
+                }
+              ],
+              "text": "[ALT] ALT TOTAL"
+            },
+            "valueQuantity": {
+              "value": 41,
+              "unit": "U/l",
+              "system": "http://unitsofmeasure.org",
+              "code": "U/l"
+            },
+            "interpretation": [
+              {
+                "coding": [
+                  {
+                    "system": "https://dia.medicover.com/serviceknowledgebase/interpretation_flags",
+                    "code": "H"
+                  }
+                ],
+                "text": "High"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "https://dia.medicover.com/serviceknowledgebase/interpretation_flags",
+                    "code": "A"
+                  }
+                ],
+                "text": "Abnormal"
+              }
+            ],
+            "referenceRange": [{ "high": { "value": 40 }, "text": "< 40" }]
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ccca648a-e1c5-482d-ac58-33337397c40a",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "identifier": [
+          {
+            "system": "https://dia.medicover.com/Silab/RO/Constanta",
+            "value": "a2133123312/20190202.1"
+          }
+        ],
+        "basedOn": [
+          { "reference": "urn:uuid:7e309b16-b35f-44cb-9936-824225d841d6" }
+        ],
+        "code": {
+          "coding": [
+            { "system": "http://snomed.info/sct", "code": "108252007" }
+          ],
+          "text": "Laboratory procedure"
+        },
+        "subject": {
+          "reference": "urn:uuid:765c8d84-7718-47e7-ba98-d24f2372fc61"
+        },
+        "performer": [
+          { "reference": "urn:uuid:886f95ab-9bbc-40de-9a67-9185043e71c6" },
+          { "reference": "urn:uuid:85c02a21-d6d3-4938-ad8f-ce16ff7a6305" },
+          { "reference": "urn:uuid:a4de4778-7c23-4c59-bd26-be515c52ca9b" }
+        ],
+        "resultsInterpreter": [
+          { "reference": "urn:uuid:2250e68e-53e2-4d73-873b-4293ab3188d2" },
+          { "reference": "urn:uuid:ff471ec5-c505-4098-a62d-421264061182" },
+          { "reference": "urn:uuid:e87bb104-d274-4bd6-bea4-532c8b52a180" }
+        ],
+        "result": [
+          { "reference": "urn:uuid:551d3f69-32b5-4d0f-a6e6-31a1211534d6" },
+          { "reference": "urn:uuid:440a53ad-f74b-4c31-93bd-e8dbde68f6c4" }
+        ],
+        "presentedForm": [
+          {
+            "contentType": "application/pdf",
+            "language": "en",
+            "data": "AQIDBAUGBw==",
+            "size": 100,
+            "hash": "AQID",
+            "title": "Report",
+            "creation": "2019-04-02T12:00:00"
+          },
+          {
+            "contentType": "application/pdf",
+            "language": "ro",
+            "data": "AQIDBAUGBw==",
+            "size": 100,
+            "hash": "AQID",
+            "title": "Report",
+            "creation": "2019-04-02T12:00:00"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "https://hapi.bdp-dev.k8s.mednet.world/R4/DiagnosticReport"
+      }
+    }
+  ]
+}
