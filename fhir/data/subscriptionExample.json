@@ -1,0 +1,9 @@
+{ "resourceType": "Subscription",
+    "status": "active",
+    "criteria": "Task?performer=CONSTANTA&status=requested",
+    "channel": {
+      "type": "message",
+      "endpoint": "kafka://{PRODUCER_CONFIG}/LIS_CONSTANTA_IN",
+      "payload": "application/json"
+    }}
+  
